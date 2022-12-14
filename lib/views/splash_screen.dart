@@ -20,7 +20,7 @@ class SplashScreenViewState extends State<SplashScreenView> {
 
   navigatorHome() async {
     await Future.delayed(
-      const Duration(seconds: 4),
+      const Duration(seconds: 5),
     );
     Navigator.of(context).push(
       MaterialPageRoute(

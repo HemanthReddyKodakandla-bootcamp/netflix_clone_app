@@ -13,8 +13,18 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
-  final Stream<QuerySnapshot> _shows =
-      FirebaseFirestore.instance.collection('shows').snapshots(includeMetadataChanges: true);
+
+  int _selectedIndex = 0;
+  static final List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    const Text('Downloads', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +39,49 @@ class _HomePageViewState extends State<HomePageView> {
         actions: const [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 8.0,
+              horizontal: 16.0,
             ),
             child: Icon(Icons.search),
           ),
         ],
       ),
-      body: Padding(
+      bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: const Color(0xff323232),
+          unselectedItemColor: const Color(0xff989898),
+          selectedIconTheme: const IconThemeData(color: Colors.white),
+          selectedLabelStyle:
+              const TextStyle(color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w600),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded,),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: "Downloads",
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.white,
+          iconSize: 32,
+          onTap: _onItemTapped,
+          elevation: 5),
+      body: _widgetOptions.elementAt(_selectedIndex),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  Home({Key? key}) : super(key: key);
+    final Stream<QuerySnapshot> _shows =
+      FirebaseFirestore.instance.collection('shows').snapshots(includeMetadataChanges: true);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 12.0,
+          vertical: 12.0
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -62,18 +106,21 @@ class _HomePageViewState extends State<HomePageView> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            data['heading'],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: GoogleFonts.montserrat().fontFamily),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12.0,),
+                            child: Text(
+                              data['heading'],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: GoogleFonts.montserrat().fontFamily),
+                            ),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children: List.generate(data['list'].length,(index) {
+                              children: List.generate(data['list'].length, (index) {
                                 return ThumbnailWidget(show: data['list'][index]);
                               }),
                             ),
@@ -86,8 +133,6 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
