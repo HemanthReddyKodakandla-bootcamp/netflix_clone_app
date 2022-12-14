@@ -20,7 +20,7 @@ class ShowBottomSheet {
               topRight: Radius.circular(16.0),
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -50,21 +50,26 @@ class ShowBottomSheet {
                                   style: const TextStyle(
                                     fontSize: 24.0,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                   maxLines: 2,
                                   softWrap: true,
                                   overflow: TextOverflow.clip,
                                 ),
                               ),
-                              Container(
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle, color: Colors.white30),
-                                padding: const EdgeInsets.all(4.0),
-                                child: const Icon(
-                                  Icons.close_rounded,
-                                  size: 26.0,
-                                  color: Colors.white,
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle, color: Colors.white30),
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: const Icon(
+                                    Icons.close_rounded,
+                                    size: 26.0,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               )
                             ],
@@ -105,7 +110,7 @@ class ShowBottomSheet {
                   bottom: 8.0,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButtonWidget(
                       icon: Icons.play_arrow_rounded,
@@ -115,7 +120,7 @@ class ShowBottomSheet {
                       iconColor: Colors.black,
                     ),
                     IconButtonWidget(
-                      icon: Icons.download_rounded,
+                      icon: Icons.download_outlined,
                       onPressed: () {},
                       text: "Download",
                       backgroundColor: Colors.white30,

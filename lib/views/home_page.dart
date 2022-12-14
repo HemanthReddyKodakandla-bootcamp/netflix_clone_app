@@ -25,7 +25,6 @@ class _HomePageViewState extends State<HomePageView> {
         title: Image.asset(
           ImagePaths.iconImage,
           height: 52.0,
-          width: 52.0,
         ),
         actions: const [
           Padding(

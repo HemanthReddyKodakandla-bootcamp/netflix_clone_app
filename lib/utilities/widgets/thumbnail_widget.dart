@@ -1,42 +1,61 @@
 import 'package:flutter/material.dart';
-
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'bottom_sheet.dart';
+import 'dart:math';
 
-class ThumbnailWidget extends StatelessWidget {
+class ThumbnailWidget extends StatefulWidget {
   final Map<dynamic, dynamic> show;
+
   const ThumbnailWidget({
     required this.show,
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ThumbnailWidget> createState() => _ThumbnailWidgetState();
+}
+
+class _ThumbnailWidgetState extends State<ThumbnailWidget> {
+  Random random = Random();
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 120,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        elevation: 8.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: SizedBox(
+        width: 120,
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                topRight: Radius.circular(8.0),
-              ),
-              child: Image.network(
-                show['thumbnail'],
-                height: 150,
-                width: 120,
-                fit: BoxFit.cover,
-              ),
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    topRight: Radius.circular(8.0),
+                  ),
+                  child: Image.network(
+                    widget.show['thumbnail'],
+                    height: 150,
+                    width: 120,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ],
+            ),
+            LinearPercentIndicator(
+              lineHeight: 2.6,
+              percent: (random.nextInt(10) / 10),
+              padding: EdgeInsets.zero,
+              progressColor: const Color(0xffE50914),
+              backgroundColor: const Color(0xff989898),
+              animation: true,
             ),
             Container(
-              height: 36.0,
               decoration: const BoxDecoration(
                 color: Color(0xff2A2A2A),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(8.0),
-                  bottomRight: Radius.circular(8.0),
+                  bottomLeft: Radius.circular(6.0),
+                  bottomRight: Radius.circular(6.0),
                 ),
               ),
               child: Row(
@@ -49,7 +68,7 @@ class ThumbnailWidget extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      ShowBottomSheet.showSheet(context,show);
+                      ShowBottomSheet.showSheet(context, widget.show);
                     },
                   ),
                   IconButton(
@@ -59,7 +78,7 @@ class ThumbnailWidget extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      ShowBottomSheet.showSheet(context,show);
+                      ShowBottomSheet.showSheet(context, widget.show);
                     },
                   ),
                 ],
