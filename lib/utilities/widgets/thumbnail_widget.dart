@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'bottom_sheet.dart';
 
 class ThumbnailWidget extends StatelessWidget {
+  final Map<dynamic, dynamic> show;
   const ThumbnailWidget({
+    required this.show,
     Key? key,
   }) : super(key: key);
 
@@ -22,7 +24,7 @@ class ThumbnailWidget extends StatelessWidget {
                 topRight: Radius.circular(8.0),
               ),
               child: Image.network(
-                "https://e1.pxfuel.com/desktop-wallpaper/794/237/desktop-wallpaper-friends-tv-show-on-dog-dog-thumbnail.jpg",
+                show['thumbnail'],
                 height: 150,
                 width: 120,
                 fit: BoxFit.cover,
@@ -47,7 +49,7 @@ class ThumbnailWidget extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      ShowBottomSheet.showSheet(context);
+                      ShowBottomSheet.showSheet(context,show);
                     },
                   ),
                   IconButton(
@@ -57,7 +59,7 @@ class ThumbnailWidget extends StatelessWidget {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      ShowBottomSheet.showSheet(context);
+                      ShowBottomSheet.showSheet(context,show);
                     },
                   ),
                 ],

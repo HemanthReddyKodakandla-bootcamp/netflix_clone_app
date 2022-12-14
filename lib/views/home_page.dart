@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +13,9 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
+  final Stream<QuerySnapshot> _shows =
+      FirebaseFirestore.instance.collection('shows').snapshots(includeMetadataChanges: true);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,22 +27,12 @@ class _HomePageViewState extends State<HomePageView> {
           height: 52.0,
           width: 52.0,
         ),
-        actions: [
-          const Padding(
+        actions: const [
+          Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 8.0,
             ),
             child: Icon(Icons.search),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 8.0,
-            ),
-            child: Image.asset(
-              ImagePaths.iconImage,
-              height: 52.0,
-              width: 52.0,
-            ),
           ),
         ],
       ),
@@ -50,26 +44,46 @@ class _HomePageViewState extends State<HomePageView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "US TV Shows",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: GoogleFonts.montserrat().fontFamily),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                  ],
-                ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _shows,
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return const Center(child: Text('Something went wrong'));
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: Text("Loading"));
+                  }
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                      DocumentSnapshot doc = document;
+                      Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data['heading'],
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: GoogleFonts.montserrat().fontFamily),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: List.generate(data['list'].length,(index) {
+                                return ThumbnailWidget(show: data['list'][index]);
+                              }),
+                            ),
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  );
+                },
               ),
             ],
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShowBottomSheet {
-  static showSheet(BuildContext context) {
+  static showSheet(BuildContext context, Map<dynamic, dynamic> movie) {
     showModalBottomSheet<void>(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -28,7 +28,7 @@ class ShowBottomSheet {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ImageWidget(),
+                  ImageWidget(thumbnail: movie['thumbnail']),
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -44,10 +44,10 @@ class ShowBottomSheet {
                           ),
                           child: Row(
                             children: [
-                              const Expanded(
+                              Expanded(
                                 child: Text(
-                                  "Demon Slayer: Kimetsu no Yaiba",
-                                  style: TextStyle(
+                                  movie['title'],
+                                  style: const TextStyle(
                                     fontSize: 24.0,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w800,
@@ -85,17 +85,15 @@ class ShowBottomSheet {
                             ),
                           ),
                         ),
-                        Text(
-                          "After kjfd jk k jk kjkj kjk k kjk hk hk hkh klh klh klhklh lkhlk hlk hl kh lh lkjh lkjh ",
-                          maxLines: 4,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
+                        Text(movie['description'],
+                            maxLines: 4,
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
                               fontSize: 14.0,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                               fontFamily: GoogleFonts.montserrat().fontFamily,
-                            )
-                        )
+                            ))
                       ],
                     ),
                   ))
@@ -186,7 +184,9 @@ class ShowBottomSheet {
 }
 
 class ImageWidget extends StatelessWidget {
+  final String thumbnail;
   const ImageWidget({
+    required this.thumbnail,
     Key? key,
   }) : super(key: key);
 
@@ -202,7 +202,7 @@ class ImageWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(4.0),
               child: Image.network(
-                "https://e1.pxfuel.com/desktop-wallpaper/794/237/desktop-wallpaper-friends-tv-show-on-dog-dog-thumbnail.jpg",
+                thumbnail,
                 height: 150,
                 width: 120,
                 fit: BoxFit.cover,
