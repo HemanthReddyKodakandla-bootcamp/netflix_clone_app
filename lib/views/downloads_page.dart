@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../utilities/images.dart';
+
 class DownloadsView extends StatefulWidget {
   const DownloadsView({super.key});
 
@@ -40,6 +42,12 @@ class _DownloadsViewState extends State<DownloadsView> {
                             height: 150,
                             width: 120,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Image.asset(ImagePaths.iconImage,
+                              height: 150,
+                              width: 120,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Expanded(

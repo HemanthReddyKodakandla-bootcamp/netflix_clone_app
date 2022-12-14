@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/utilities/images.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'bottom_sheet.dart';
 import 'dart:math';
@@ -38,6 +39,11 @@ class _ThumbnailWidgetState extends State<ThumbnailWidget> {
                     height: 150,
                     width: 120,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(ImagePaths.iconImage,
+                      height: 150,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 )
               ],
