@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
        theme: ThemeData(
             appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
             primarySwatch: Colors.blue,
-            backgroundColor: Colors.black,
-            scaffoldBackgroundColor: Colors.black,
+            backgroundColor:const Color(0xff000306),
+            scaffoldBackgroundColor: const Color(0xff000306),
             fontFamily: GoogleFonts.montserrat().fontFamily,
             textTheme: const TextTheme(
                 bodyText1: TextStyle(color: Colors.white),
