@@ -21,24 +21,13 @@ class _HomePageViewState extends State<HomePageView> {
         title: Image.asset(
           ImagePaths.iconImage,
           height: 52.0,
-          width: 52.0,
         ),
-        actions: [
-          const Padding(
+        actions: const [
+          Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 8.0,
             ),
             child: Icon(Icons.search),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 8.0,
-            ),
-            child: Image.asset(
-              ImagePaths.iconImage,
-              height: 52.0,
-              width: 52.0,
-            ),
           ),
         ],
       ),
@@ -50,25 +39,31 @@ class _HomePageViewState extends State<HomePageView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "US TV Shows",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: GoogleFonts.montserrat().fontFamily),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 8.0),
+                child: Text(
+                  "US TV Shows",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: GoogleFonts.montserrat().fontFamily),
+                ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                    ThumbnailWidget(),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    children: const [
+                      ThumbnailWidget(),
+                      ThumbnailWidget(),
+                      ThumbnailWidget(),
+                      ThumbnailWidget(),
+                      ThumbnailWidget(),
+                      ThumbnailWidget(),
+                    ],
+                  ),
                 ),
               ),
             ],
