@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../donloads_db.dart';
+
 class ShowBottomSheet {
   static showSheet(BuildContext context, Map<dynamic, dynamic> movie) {
     showModalBottomSheet<void>(
@@ -58,7 +60,7 @@ class ShowBottomSheet {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.pop(context);
                                 },
                                 child: Container(
@@ -114,28 +116,38 @@ class ShowBottomSheet {
                   children: [
                     IconButtonWidget(
                       icon: Icons.play_arrow_rounded,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       text: "Play",
                       backgroundColor: Colors.white,
                       iconColor: Colors.black,
                     ),
                     IconButtonWidget(
                       icon: Icons.download_outlined,
-                      onPressed: () {},
+                      onPressed: () {
+                        DownloadsLocalDb()
+                            .saveDownloadsData(movie)
+                            .then((value) => Navigator.pop(context));
+                      },
                       text: "Download",
                       backgroundColor: Colors.white30,
                       iconColor: Colors.white,
                     ),
                     IconButtonWidget(
                       icon: Icons.done_rounded,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       text: "My List",
                       backgroundColor: Colors.white30,
                       iconColor: Colors.white,
                     ),
                     IconButtonWidget(
                       icon: Icons.share_outlined,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       text: "Share",
                       backgroundColor: Colors.white30,
                       iconColor: Colors.white,

@@ -1,11 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'firebase_options.dart';
 import 'views/splash_screen.dart';
 
-void main() async{
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -21,16 +24,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Netflix Clone',
       debugShowCheckedModeBanner: false,
-
-       theme: ThemeData(
-            appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
-            primarySwatch: Colors.blue,
-            backgroundColor:const Color(0xff000306),
-            scaffoldBackgroundColor: const Color(0xff000306),
-            fontFamily: GoogleFonts.montserrat().fontFamily,
-            textTheme: const TextTheme(
-                bodyText1: TextStyle(color: Colors.white),
-                bodyText2: TextStyle(color: Colors.white),),),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+        primarySwatch: Colors.blue,
+        backgroundColor: const Color(0xff000306),
+        scaffoldBackgroundColor: const Color(0xff000306),
+        fontFamily: GoogleFonts.montserrat().fontFamily,
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: Colors.white),
+        ),
+      ),
       home: const SplashScreenView(),
     );
   }

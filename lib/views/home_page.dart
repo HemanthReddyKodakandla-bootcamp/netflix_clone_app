@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../utilities/images.dart';
 import '../utilities/widgets/thumbnail_widget.dart';
+import 'downloads_page.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -17,13 +19,34 @@ class _HomePageViewState extends State<HomePageView> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     Home(),
-    const Text('Downloads', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+   const DownloadsView(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+    Box? box;
+  @override
+  void initState() {
+    openBox();
+    super.initState();
+  }
+
+  openBox() async {
+    box = await Hive.openBox<Map<dynamic, dynamic>>("downloads");
+  }
+
+  closeBox() async {
+    await box!.close();
+  }
+
+  @override
+  void dispose() {
+    closeBox();
+    super.dispose();
   }
 
   @override
@@ -57,7 +80,7 @@ class _HomePageViewState extends State<HomePageView> {
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.downloading_rounded),
               label: "Downloads",
             ),
           ],
