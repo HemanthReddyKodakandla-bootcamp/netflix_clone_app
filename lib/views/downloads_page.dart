@@ -22,17 +22,21 @@ class _DownloadsViewState extends State<DownloadsView> {
           List<dynamic> localData = box.values.toList();
           if (localData.isEmpty) {
             return Container(
-              color: Colors.red,
+              alignment: Alignment.center,
+              child: const Text(
+                "No Downloads Available",
+                style: TextStyle(color: Colors.white),
+              ),
             );
           } else {
             return ListView.builder(
                 itemCount: localData.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                     child: Row(
                       children: [
-                         ClipRRect(
+                        ClipRRect(
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(8.0),
                             topRight: Radius.circular(8.0),
@@ -42,8 +46,8 @@ class _DownloadsViewState extends State<DownloadsView> {
                             height: 150,
                             width: 120,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(ImagePaths.iconImage,
+                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                              ImagePaths.iconImage,
                               height: 150,
                               width: 120,
                               fit: BoxFit.cover,
@@ -57,7 +61,8 @@ class _DownloadsViewState extends State<DownloadsView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(localData[index]['title'],
+                                Text(
+                                  localData[index]['title'],
                                   style: const TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.white,
@@ -66,26 +71,29 @@ class _DownloadsViewState extends State<DownloadsView> {
                                   maxLines: 2,
                                   overflow: TextOverflow.clip,
                                 ),
-                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4.0,
-                              ),
-                              child: Text(
-                                "2021   U/A  16+   3 Seasons",
-                                overflow: TextOverflow.clip,
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.white54,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: GoogleFonts.montserrat().fontFamily,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 4.0,
+                                  ),
+                                  child: Text(
+                                    "2021   U/A  16+   3 Seasons",
+                                    overflow: TextOverflow.clip,
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.white54,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
                               ],
                             ),
                           ),
                         ),
-                        const Icon(Icons.system_security_update_outlined,color: Colors.white,)
+                        const Icon(
+                          Icons.system_security_update_outlined,
+                          color: Colors.white,
+                        )
                       ],
                     ),
                   );
