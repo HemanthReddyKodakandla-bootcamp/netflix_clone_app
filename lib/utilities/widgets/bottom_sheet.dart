@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../donloads_db.dart';
+import '../downloads_db.dart';
 import '../images.dart';
 
 class ShowBottomSheet {

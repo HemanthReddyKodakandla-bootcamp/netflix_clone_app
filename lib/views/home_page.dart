@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../utilities/images.dart';
 import '../utilities/widgets/thumbnail_widget.dart';
 import 'downloads_page.dart';
+import 'student_view.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -20,6 +21,7 @@ class _HomePageViewState extends State<HomePageView> {
   static final List<Widget> _widgetOptions = <Widget>[
     Home(),
    const DownloadsView(),
+   HomePageWidget()
   ];
 
   void _onItemTapped(int index) {
@@ -82,6 +84,10 @@ class _HomePageViewState extends State<HomePageView> {
             BottomNavigationBarItem(
               icon: Icon(Icons.downloading_rounded),
               label: "Downloads",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.route_rounded),
+              label: "Routes",
             ),
           ],
           currentIndex: _selectedIndex,

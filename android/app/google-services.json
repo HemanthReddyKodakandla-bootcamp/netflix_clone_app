@@ -29,6 +29,13 @@
             {
               "client_id": "274664192456-l34fdjrn2ek52egelhtssnb4k19bt44o.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "274664192456-hrg1fqklekao350uvq36dubskpn8d2lt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.netflixCloneApp"
+              }
             }
           ]
         }

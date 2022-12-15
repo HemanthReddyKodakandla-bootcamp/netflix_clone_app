@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firebase_options.dart';
+import 'views/add_student_view.dart';
 import 'views/splash_screen.dart';
 
 void main() async {
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const SplashScreenView(),
+      routes: {
+        // '/': (context) => const SplashScreenView(),
+        '/addStudent': (context) => const AddStudent(),
+      },
     );
   }
 }
